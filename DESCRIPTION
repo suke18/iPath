@@ -1,0 +1,21 @@
+Package: iPath
+Type: Package
+Title: iPath pipeline for detecting perturbed pathways at individual level. 
+Version: 0.99.0
+Author: Kenong Su<kenong.su@emory.edu>
+Maintainer: Kenong Su<kenong.su@emory.edu>
+Description: iPath is the Bioconductor package used for calculating personalized pathway score and test the association with survival outcomes. Abundant single-gene biomarkers have been identified and used in the clinics. However, hundreds of oncogenes or tumor-suppressor genes are involved during the process of tumorigenesis. We believe individual-level expression patterns of pre-defined pathways or gene sets are better biomarkers then single genes. In this study, we devised a computational method named iPath to identify prognostic biomarker pathways, one sample at a time. To test its utility, we conducted a pan-cancer analysis across 14 cancer types from The Cancer Genome Atlas and demonstrated that iPath is capable of identifying highly predictive biomarkers for clinical outcomes, including overall survival, tumor subtypes, and tumor stage classifications. We found that pathway-based biomarkers are more robust and effective than single genes. 
+License: GPL-2
+Encoding: UTF-8
+Suggests: rmarkdown, BiocStyle, knitr
+VignetteBuilder: knitr
+Imports:
+    Rcpp,
+    matrixStats,
+    ggpubr,
+    ggplot2,
+LazyData: true
+biocViews: DifferentialExpression, Pathways, Software
+LinkingTo: Rcpp
+Depends: R (>= 4.0.0), mclust,survminer, BiocParallel, survival
+RoxygenNote: 7.1.1

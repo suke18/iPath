@@ -1,0 +1,9 @@
+citEntry(entry="article",
+         title = "Pan-Cancer Analysis of Pathway-Based Gene Expression Pattern at the Individual Level Reveals Novel Biomarkers of Clinical Prognosis",
+         author = personList( as.person("Kenong Su"), as.person("Steve Qin")),
+         year = 2021,
+         journal = "Cell Reports Methods",
+  	 year={2021},
+         textVersion =
+         paste("Kenong Su, Steve Qin (2021):",
+               "Pan-Cancer Analysis of Pathway-Based Gene Expression Pattern at the Individual Level Reveals Novel Biomarkers of Clinical Prognosis. doi:10.1016/j.crmeth.2021.100050" ) )
