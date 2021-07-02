@@ -25,7 +25,7 @@ This function allows to investigate on one specific pathway.
 data(PRAD_data)
 data(GSDB_example)
 iES_mat = iES_cal2(prad_exprs, GSDB = GSDB_example)
-iES_surv(iES_mat, cli = prad_cli)
+iES_surv(iES_mat, cli = prad_cli, indVec = prad_inds)
 }
 \keyword{analysis}
 \keyword{and}
