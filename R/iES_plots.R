@@ -14,7 +14,7 @@
 #' data(PRAD_data)
 #' data(GSDB_example)
 #' iES_mat = iES_cal2(prad_exprs, GSDB = GSDB_example)
-#' water_fall(iES_mat, gs_str = "SimPathway1")
+#' water_fall(iES_mat, gs_str = "SimPathway1", indVec =prad_inds)
 #' @export
 water_fall = function(iES_mat, gs_str,indVec, title = TRUE){
     group_colors = c(tumor = "Brown", normal = "#56B4E9")

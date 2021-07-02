@@ -23,7 +23,7 @@ This function allows you to express your love of cats.
 data(PRAD_data)
 data(GSDB_example)
 iES_mat = iES_cal2(prad_exprs, GSDB = GSDB_example)
-water_fall(iES_mat, gs_str = "SimPathway1")
+water_fall(iES_mat, gs_str = "SimPathway1", indVec =prad_inds)
 }
 \keyword{and}
 \keyword{for}
