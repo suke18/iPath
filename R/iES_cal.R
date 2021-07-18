@@ -34,6 +34,7 @@ GSEA = function(gene_list, gene_set, stats_vector){
 #' This function calculates the iES matrix which is the core of iPath.
 #' @importFrom matrixStats rowSds
 #' @importFrom Rcpp sourceCpp
+#' @importFrom stats na.omit
 #' @import BiocParallel
 #' @param Y is the expression matrix.
 #' @param GSDB is the gene set database.
@@ -54,6 +55,7 @@ iES_cal2 = function(Y, GSDB,  BPPARAM = NULL, nPro = 0){
     ngsets = length(GSDB_paths);
     message("start normalization ...")
     Y = rem_data(Y)
+    ngenes = nrow(Y)
     gnames = rownames(Y)
     row_mean = rowMeans(Y)
     row_sd = rowSds(Y)
@@ -61,16 +63,17 @@ iES_cal2 = function(Y, GSDB,  BPPARAM = NULL, nPro = 0){
 
     order_array = apply(tmp_norm, 2, function(x) rev(order(x)))
     order_name = apply(order_array, 2, function(i) gnames[i])
-    order_stats = sapply(1:npats, function(i) tmp_norm[, i][order_array[, i]])
+    order_stats = vapply(seq_len(npats), function(i) tmp_norm[, i][order_array[, i]],
+                         FUN.VALUE = numeric(ngenes))
 
     bp_fun = function(i) {
         one_stats = order_stats[, i]
         one_names = order_name[, i]
         names(one_stats) = one_names
-        one_pat_vec = sapply(1:ngsets, function(j){
+        one_pat_vec = vapply(seq_len(ngsets), function(j){
             one_match_pos = na.omit(match(GSDB_paths[[j]], one_names))
             return(caliES2(one_stats, one_match_pos))
-        })
+        }, FUN.VALUE = numeric(1))
     }
 
     tmpParam = setUp_BPPARAM(nPro, BPPARAM = BPPARAM)

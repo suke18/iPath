@@ -30,7 +30,7 @@ iES_surv = function(iES_mat, cli, indVec = NULL, npatsThre = 5){
     tumor_com = intersect(tumor_pat_names, cli$bcr_patient_barcod)
     tumor_Y = tumor_Y[, which(tumor_pat_names %in% tumor_com)]
 
-    iPath_res = sapply(1:npaths, function(i){
+    iPath_res = vapply(seq_len(npaths), function(i){
         norm_vec = norm_Y[i, ]
         tumor_vec = tumor_Y[i, ]
         tmp_m = Mclust(norm_vec, parameter = TRUE, modelNames = "V")
@@ -62,7 +62,7 @@ iES_surv = function(iES_mat, cli, indVec = NULL, npatsThre = 5){
             tmp_res = rep(NA, 4)
         }
         return(tmp_res)
-    })
+    }, FUN.VALUE = numeric(4))
     iPath_res = t(iPath_res)
     dimnames(iPath_res) = list(path_names, c("nPerturb", "c-index", "coef", "pval"))
     return(iPath_res)

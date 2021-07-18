@@ -3,6 +3,7 @@
 #' This function sets up the environment for parallel computing.
 #' @param nproc number of processors
 #' @param BPPARAM bpparameter from bpparam
+#' @keywords internal
 #' @return BAPPARAM settings
 setUp_BPPARAM = function (nproc = 0, BPPARAM = NULL)
 {
@@ -30,6 +31,9 @@ setUp_BPPARAM = function (nproc = 0, BPPARAM = NULL)
 #'
 #' This function helps remove non-informative genes.
 #' @param Y is the expression matrix.
+#' @importFrom stats sd
+#' @keywords internal
+#' @import stats
 #' @return a processed matrix
 rem_data = function(Y){
     rem_ids = which(apply(Y, 1, sd) == 0)

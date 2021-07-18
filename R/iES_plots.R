@@ -29,15 +29,16 @@ water_fall = function(iES_mat, gs_str,indVec, title = TRUE){
     tmp_iES_mat = data.frame(value = c(tumor[order(tumor)], rep(0, n_gap), normal[order(normal)]),
                           type = c(rep("tumor", length(tumor)), rep("tumor", n_gap), rep("normal", length(normal))),
                           fill = c(rep("fill", length(tumor)), rep(NA, n_gap), rep("fill", length(normal))))
+    nrow_iES_mat = nrow(tmp_iES_mat)
     if (title ==TRUE){
-        p = ggplot(tmp_iES_mat, aes(x = 1:nrow(tmp_iES_mat), y = value)) +
+        p = ggplot(tmp_iES_mat, aes(x = seq_len(nrow_iES_mat), y = value)) +
             geom_area(aes(fill = type)) +
             theme(legend.position="top", legend.direction="horizontal", panel.background = element_blank(), axis.line = element_line(colour = "black"))+
             labs(x="Samples", y="Enrichment Score") +
             scale_fill_manual(values=group_colors) +
             ggtitle(gs_str)
     }else{
-        p = ggplot(tmp_iES_mat, aes(x = 1:nrow(tmp_iES_mat), y = value)) +
+        p = ggplot(tmp_iES_mat, aes(x = seq_len(nrow_iES_mat), y = value)) +
             geom_area(aes(fill = type)) +
             theme(legend.position="top", legend.direction="horizontal", panel.background = element_blank(), axis.line = element_line(colour = "black"))+
             labs(x="Samples", y="Enrichment Score") +
@@ -53,6 +54,7 @@ water_fall = function(iES_mat, gs_str,indVec, title = TRUE){
 #' @param indVec the binary indicator for normal(0) and tumor (1) patients.
 #' @param title boolean true or false for including the title in the ggplot.
 #' @import ggpubr
+#' @importFrom survminer ggsurvplot
 #' @keywords densityfall plot for normal and tumor sample.
 #' @return ggplot object containing the KM plot.
 #' @export
@@ -94,7 +96,7 @@ density_fall = function(iES_mat, gs_str,indVec, title = TRUE){
 #' iES survival for a certain pathway
 #'
 #' This function allows you to express your love of cats.
-#' @import survminer
+#' @importFrom survminer ggsurvplot
 #' @import survival
 #' @import mclust
 #' @import ggpubr
